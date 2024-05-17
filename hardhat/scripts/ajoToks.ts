@@ -1,21 +1,22 @@
-const  rew =  require ("hardhat");
+import { ethers } from "hardhat";
 
-
-async function toks(): Promise<void> {
-  const [deployer] = await rew.getSigners();
+async function saver() {
+  const [deployer] = await ethers.getSigners();
 
   console.log("Deploying contracts with the account:", deployer.address);
 
-  const AjoToken = await rew.getContractFactory("AjoToken");
-  const ajoToken = await AjoToken.deploy(1000);
-  await ajoToken.deployed();
+  const AjoToken = await ethers.getContractFactory("AjoToken");
+  const ajoToken = await AjoToken.deploy(1000); 
+  console.log("Target set to:", ajoToken.target);
 
-  console.log("AjoToken deployed to:", ajoToken.address);
+      // Target set to: 0xc75B5339e114774ff651854ACBf4d5CeBD949669
+
+
 }
 
-toks()
+saver()
   .then(() => process.exit(0))
-  .catch((error: Error) => {
+  .catch((error) => {
     console.error(error);
     process.exit(1);
   });
